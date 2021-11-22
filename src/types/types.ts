@@ -1,6 +1,8 @@
 import { IndexedDbType } from 'utilits/temporaryAnyType'
 import { SearchParamsType } from './../hooks/useIndexedDb'
 
+declare module 'react-router-dom'
+
 export type TaskItemType = {
   id: string // key
   columnId: string //поиск
