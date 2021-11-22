@@ -1,0 +1,83 @@
+.column_container {
+  width: 320px;
+  height: auto;
+  padding: 0px 12px 0px 0px;
+}
+
+.column_scrollContainer {
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.column_buttonGroup {
+  display: flex;
+  flex-direction: column;
+  transition: 0.25s;
+  padding: 0px 16px;
+}
+
+.column_card {
+  height: fit-content;
+}
+
+.column_card:hover .column_buttonGroup {
+  display: flex;
+}
+
+.column_buttonGroup--active {
+  display: flex;
+}
+
+.column_title {
+  font-size: 16px;
+  width: 100%;
+  padding: 0px 4px;
+  margin: 0px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.column_taskList {
+  padding: 4px 16px;
+  border-bottom: 1px solid rgba(160, 160, 160, 0.2);
+}
+
+.column_buttonGroup_buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 12px 8px;
+  border-bottom: 1px solid rgba(160, 160, 160, 0.2);
+  & > i {
+    cursor: pointer;
+    width: 16px;
+    &:hover {
+      opacity: 0.5;
+      transition: 0.3s;
+    }
+  }
+}
+
+.column_iconClose {
+  padding-top: 8px;
+  text-align: right;
+  & i {
+    cursor: pointer;
+  }
+}
+
+.column_footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 12px !important;
+  & > div {
+    padding: 4px 8px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+      transition: 0.3s;
+    }
+  }
+}

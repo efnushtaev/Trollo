@@ -1,0 +1,18 @@
+.columns_container {
+  height: 100%;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0px 8px;
+}
+
+.columns_columnContainer {
+  height: 100%;
+  padding-bottom: 24px;
+  display: flex;
+  width: fit-content;
+}
+
+.columns_addItemTail_container {
+  width: 320px;
+}

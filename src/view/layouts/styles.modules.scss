@@ -1,0 +1,77 @@
+.mainLayout_container {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.mainLayout_container > div {
+  display: flex;
+  flex-direction: column;
+  &:nth-child(1) {
+    height: calc(100% - 40px);
+  }
+}
+
+.mainLayout_navigation {
+  height: 48px;
+  box-shadow: 0px 2px 4px 0px rgba(34, 60, 80, 0.3);
+  padding: 12px 32px;
+  margin: 0px;
+}
+
+.mainLayout_navHome {
+  display: flex;
+  align-items: center;
+  & > a {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.mainLayout_boardColumn {
+  margin: 0px 12px;
+  font-size: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.mainLayout_navLogo {
+  margin-left: 0px;
+  margin-right: auto;
+  & > a {
+    display: flex;
+  }
+}
+
+.mainLayout_logo {
+  margin: 0px;
+  opacity: 0.7;
+}
+
+.mainLayout_navLogout {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  & > a {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.mainLayout_logoutTitle {
+  margin: 0px 0px 0px 4px;
+}
+
+.mainLayout_childrenContainer {
+  height: calc(100% - 48px);
+  padding: 20px 4px 4px;
+}
+
+.mainLayout_footerContainer {
+  border-top: 1px solid #c1c1c1;
+  background: #dfdfdf;
+  padding: 0px 20px 5px;
+  height: 40px;
+}
