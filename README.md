@@ -1,3 +1,3 @@
 # trollo
-trello clone home page
+home page
 https://nes-trollo.herokuapp.com/
