@@ -19,6 +19,21 @@ export const useAuth = () => {
         return add(authDb, [StoreName.AUTH], { ...payload, password: hashedPassword }).then(res =>
           initDB(res.dbName, dataDbVersion, DB_DATA_STORE)
         )
+        // console.log('signIn')
+        // const db = await add(authDb, [StoreName.AUTH], { ...payload, password: hashedPassword }).then(async(res) => {
+        //   const init = await initDB(res.dbName, dataDbVersion, DB_DATA_STORE).then(async (res) => {
+        //     return res
+        //   })
+        //   return await init.then((res: TEMPORARY_ANY) => res)
+        // })
+
+        // const resAuthDb = await add(authDb, [StoreName.AUTH], {
+        //   ...payload,
+        //   password: hashedPassword
+        // })
+        // const resDb = await initDB(resAuthDb.dbName, dataDbVersion, DB_DATA_STORE)
+        // console.log('signIn, resDb: ', resDb)
+        // return resDb
       }
     },
     [add, initDB]
@@ -70,7 +85,10 @@ export const useAuth = () => {
   const sessionInit = useCallback(async function () {
     const promise = new Promise((res: (v: { dbName: string }) => void, rej) => {
       const sessionData = getDbName(sessionStorage.getItem(SESSION_ITEM_NAME))
-      setTimeout(() => sessionData.length ? res({ dbName: sessionData }) : rej('sessionInit error'), 1000)
+      setTimeout(
+        () => (sessionData.length ? res({ dbName: sessionData }) : rej('sessionInit error')),
+        1000
+      )
     })
     return promise
   }, [])

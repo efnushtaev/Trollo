@@ -5,7 +5,6 @@ import { BoardItemType } from 'types'
 import { AppContext } from 'context'
 import { BoardCard } from 'view/components/BoardCard'
 import { MainLayout } from 'view/layouts/MainLayout'
-import { TitleSwitchField } from 'view/components/TitleSwitchField/TitleSwitchField'
 import { IndexedDbType } from 'utilits/temporaryAnyType'
 import { StoreName } from 'config'
 import { AddItemTail } from 'view/components/AddItemTail'
@@ -30,26 +29,36 @@ export const Boards: FC = () => {
   }, [isAddBoardMode])
 
   function handleAddBoard(db: IndexedDbType, storeName: StoreName.BOARD[]) {
+    console.log('handleAddBoard')
     if (newBoardTitle.length) {
+      console.log('newBoardTitle.length:', newBoardTitle.length)
+      console.log('newBoardTitle.length, boards:', boards)
       if (setBoards && boards) {
+        console.log('boards:', boards)
         const newBoard: BoardItemType = {
           id: idGenerator(),
           title: newBoardTitle,
           columns: []
         }
         add(db, storeName, newBoard)
-          .then(res => {
-            setNewBoardTitle('')
-            setAddBoardMode(false)
-            if (boards) {
-              setBoards([...boards, res])
-            } else setBoards([res])
-          })
-          .catch(err => {
-            messageToast(err)
-          })
+        .then(res => {
+          console.log('res:', res)
+          setNewBoardTitle('')
+          setAddBoardMode(false)
+          if (boards) {
+            console.log('boards:', boards)
+            setBoards([...boards, res])
+          } else setBoards([res])
+        })
+        .catch(err => {
+          messageToast(err)
+        })
+      } else {
+        messageToast('boards are empty')
       }
-    } else setInputError(true)
+    } else {
+      console.log('setInputError')
+      setInputError(true)}
   }
 
   const handleRemoveBoard = useCallback(

@@ -25,11 +25,12 @@ export const Auth: FC<AuthPropTypes> = () => {
         dbName: getDbName(userForm?.user)
       }
       signIn(authDb, payload)
-        .then(res => {
+        .then(async (res) => {
+          const db = await res
+          console.log('handleSignIn, db: ', db)
           sessionStorage.setItem(SESSION_ITEM_NAME, payload.user)
           setUserForm(undefined)
           setDataDb(res)
-          console.log('handleSignIn')
           setAuth(true)
           history.push(`/`)
         })
@@ -43,7 +44,8 @@ export const Auth: FC<AuthPropTypes> = () => {
         .then(res => {
           sessionStorage.setItem(SESSION_ITEM_NAME, userForm.user)
           setUserForm(undefined)
-          console.log('handleLogIn')
+          // TODO удалить все консоли
+          console.log('handleLogIn, res: ', res)
           setDataDb(res)
           setAuth(true)
           history.push(`/`)
@@ -83,7 +85,7 @@ export const Auth: FC<AuthPropTypes> = () => {
         </div>
         <div className="row">
           <div className="auth_buttons col s6 offset-s3">
-            <Button onClick={() => handleSignIn()} label="Добавить" size="m"/>
+            <Button onClick={() => handleSignIn()} label="Регистрация" size="m"/>
             <Button onClick={() => handleLogIn()} label="Войти" size="m"/>
           </div>
         </div>

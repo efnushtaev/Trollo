@@ -16,14 +16,17 @@ type MainLayoutType = {
 }
 
 export const MainLayout: FC<MainLayoutType> = ({ children, title, loading }) => {
-  const { getAll } = useIndexedDb()
+  const { getAll, } = useIndexedDb()
   const { logout } = useAuth()
   const { dataDb, setAuth, setBoards, isLoading } = useContext(AppContext)
 
   useEffect(() => {
+    console.log('MainLayout, dataDb: ', dataDb)
     if (dataDb && setBoards) {
+      console.log('MainLayout, dataDb:', dataDb)
       getAll<IndexedDbType, StoreName.BOARD>(dataDb, [StoreName.BOARD])
-        .then(res => {
+      .then(res => {
+          console.log('setBoards, res:', res)
           setBoards(res)
         })
         .catch(err => console.error('getAllErr', err))

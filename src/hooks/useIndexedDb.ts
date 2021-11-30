@@ -40,6 +40,7 @@ export const useIndexedDb = () => {
       storeProps: P[]
     ): Promise<IndexedDbType> => {
       return new Promise(function (resolve, reject) {
+        console.log('initDB')
         let _dbReq = indexedDB.open(dbName, version)
         let db
         _dbReq.onupgradeneeded = (event: TEMPORARY_ANY) => {
@@ -63,17 +64,18 @@ export const useIndexedDb = () => {
               }
             }
           }
-          resolve(db)
         }
 
         _changeLoadingMark(LoadingMarks.INIT_DB)
         _dbReq.onsuccess = (event: TEMPORARY_ANY) => {
           db = event.target.result
+          console.log('INIT, db_success: ', db)
           resolve(db)
           _changeLoadingMark(LoadingMarks.INIT_DB, true)
         }
-
+        
         _dbReq.onerror = (event: TEMPORARY_ANY) => {
+          console.log('INIT, db_error: ')
           reject('error initialization database ' + (event.target as TEMPORARY_ANY).errorCode)
           _changeLoadingMark(LoadingMarks.INIT_DB, true)
         }
@@ -90,7 +92,6 @@ export const useIndexedDb = () => {
         store.add({ ...payload })
         _changeLoadingMark(LoadingMarks.ADD)
         tx.oncomplete = () => {
-          // _changeLoadingMark(LoadingMarks.ADD, true)
           resolve({ ...payload })
           setTimeout(() => _changeLoadingMark(LoadingMarks.ADD, true), 1000)
         }
@@ -156,7 +157,6 @@ export const useIndexedDb = () => {
       let req = store.openCursor()
       let allItems: TEMPORARY_ANY = []
       _changeLoadingMark(LoadingMarks.GET_ALL)
-
       req.onsuccess = (event: TEMPORARY_ANY) => {
         // Результатом req.onsuccess в запросах openCursor является
         // IDBCursor
